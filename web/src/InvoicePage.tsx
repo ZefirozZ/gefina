@@ -11,6 +11,7 @@ export default function InvoicePage() {
             issueDate: '2026-09-10',
             dueDate: '2026-10-15',
             customer: {
+                id: 3,
                 name: 'Contrutora Meridiano',
                 email: 'comercial@meridiano.com.br'
             }
@@ -22,6 +23,7 @@ export default function InvoicePage() {
             issueDate: '2026-10-01',
             dueDate: '2026-10-31',
             customer: {
+                id: 7,
                 name: 'Gráfica Nova Vida',
                 email: 'grafica@novavida.com.br'
             }
@@ -33,6 +35,7 @@ export default function InvoicePage() {
             issueDate: '2026-10-12',
             dueDate: '2026-11-17',
             customer: {
+                id: 5,
                 name: 'Tendi Tudo',
                 email: 'contato@tenditudo.com.br'
             }
