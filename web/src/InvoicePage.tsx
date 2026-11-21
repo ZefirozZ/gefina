@@ -1,52 +1,39 @@
+import { useState, useEffect } from 'react';
+
 import { Invoice } from './invoiceType.ts';
 
 import InvoiceTable from './InvoiceTable.tsx';
 
 export default function InvoicePage() {
-    const invoices: Invoice[] = [
-        {
-            id: 1,
-            amount: 520354,
-            status: 'pending',
-            issueDate: '2026-09-10',
-            dueDate: '2026-10-15',
-            customer: {
-                id: 3,
-                name: 'Contrutora Meridiano',
-                email: 'comercial@meridiano.com.br'
-            }
-        },
-        {
-            id: 2,
-            amount: 89600,
-            status: 'paid',
-            issueDate: '2026-10-01',
-            dueDate: '2026-10-31',
-            customer: {
-                id: 7,
-                name: 'Gráfica Nova Vida',
-                email: 'grafica@novavida.com.br'
-            }
-        },
-        {
-            id: 3,
-            amount: 125037,
-            status: 'pending',
-            issueDate: '2026-10-12',
-            dueDate: '2026-11-17',
-            customer: {
-                id: 5,
-                name: 'Tendi Tudo',
-                email: 'contato@tenditudo.com.br'
+    const [invoices, setInvoices] = useState<Invoice[]>([]);
+    const [error, setError] = useState<null | string>(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function getInvoices () {
+            setError(null);
+
+            try {
+                const response = await fetch('/api/invoices');
+                const datas = await response.json();
+        
+                setInvoices(datas);
+            } catch {
+                setError('Não foi possível obter relação de faturas.');
+            } finally {
+                setLoading(false);
             }
         }
-    ];
+    
+        getInvoices();
+    }, []);
+
 
     return <>
         <h1>Faturas</h1>
 
         <main>
-            <InvoiceTable datas={invoices} />
+            {loading ? <p>Carregando...</p> : error ? <p>{error}</p> : <InvoiceTable datas={invoices} />}
         </main>
     </>;
 }
