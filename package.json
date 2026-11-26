@@ -10,5 +10,9 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.6.4"
+  },
+  "dependencies": {
+    "api": "^8.0.1",
+    "prefix": "^1.0.0"
   }
 }
